@@ -1,0 +1,96 @@
+{
+    "captainVersion": "2",
+    "documentation": "https://github.com/splunk/splunk-connect-for-ethereum",
+    "displayName": "Splunk Connect for Ethereum",
+    "description": "Splunk Connect for Ethereum (aka ethlogger) makes it easy to ingest data about Ethereum ledgers, node information, and node metrics into another system for analysis.",
+    "dockerCompose": {
+        "version": "3.3",
+        "services": {
+            "$$cap_appname": {
+                "image": "splunkdlt/ethlogger::$$cap_ethlogger_version",
+                "restart": "always",
+                "environment": {
+                    "ETH_RPC_URL": "$$cap_ethlogger_rpc",
+                    "START_AT_BLOCK": "$$cap_ethlogger_start",
+                    "SPLUNK_HEC_URL": "$$cap_ethlogger_hec",
+                    "SPLUNK_HEC_TOKEN": "$$cap_ethlogger_token",
+                    "SPLUNK_EVENTS_INDEX": "$$cap_ethlogger_events_index",
+                    "SPLUNK_METRICS_INDEX": "$$cap_ethlogger_events_index",
+                    "SPLUNK_INTERNAL_INDEX": "$$cap_ethlogger_events_index",
+                    "SPLUNK_HEC_REJECT_INVALID_CERTS": "$$cap_ethlogger_reject_certs",
+                    "ABI_DIR": "$$cap_ethlogger_abi_folder"
+                },
+                "volumes": [
+                    "$$cap_appname-abis:/app/abis",
+                    "$$cap_appname-checkpiont:/app"
+                ]
+            }
+        }
+    },
+    "instructions": {
+        "start": "This is a very simple splunk instance",
+        "end": "Splunk is deployed and available as $$cap_appname"
+    },
+    "variables": [
+        {
+            "id": "$$cap_ethlogger_rpc",
+            "label": "RPC Url",
+            "description": "RPC Url for ethlogger to connect to",
+            "defaultValue": "https://dai.poa.network"
+        },
+        {
+            "id": "$$cap_ethlogger_version",
+            "label": "Ethlogger Version",
+            "description": "Version of Ethlogger",
+            "defaultValue": "latest"
+        },
+        {
+            "id": "$$cap_ethlogger_start",
+            "label": "Ethlogger Version",
+            "description": "Version of Ethlogger",
+            "defaultValue": "latest"
+        },
+        {
+            "id": "$$cap_ethlogger_hec",
+            "label": "HEC Url",
+            "description": "Splunk HEC Url for ethlogger to send to",
+            "defaultValue": "https://splunk:8088"
+        },
+        {
+            "id": "$$cap_ethlogger_token",
+            "label": "HEC Token",
+            "description": "Splunk HEC Token for ethlogger to use",
+            "defaultValue": "11111111-1111-1111-1111-1111111111113"
+        },
+        {
+            "id": "$$cap_ethlogger_events_index",
+            "label": "Events Index",
+            "description": "Splunk Index for events",
+            "defaultValue": "main"
+        },
+        {
+            "id": "$$cap_ethlogger_metrics_index",
+            "label": "Metrics Index",
+            "description": "Splunk Index for metrics",
+            "defaultValue": "metrics"
+        },
+        {
+            "id": "$$cap_ethlogger_internal_index",
+            "label": "Internal Index",
+            "description": "Splunk Index for internal metrics",
+            "defaultValue": "metrics"
+        },
+        {
+            "id": "$$cap_ethlogger_reject_certs",
+            "label": "Reject Invalid Certs",
+            "description": "Reject invalid HEC ssl certs",
+            "defaultValue": "false"
+        },
+        {
+            "id": "$$cap_ethlogger_abi_folder",
+            "label": "Abi folder",
+            "description": "Folder for abis to use",
+            "defaultValue": "/app/abis"
+        }
+    ]
+}
