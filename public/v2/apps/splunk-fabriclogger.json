@@ -1,0 +1,106 @@
+{
+    "captainVersion": "2",
+    "documentation": "https://github.com/splunk/splunk-connect-for-Fabric",
+    "displayName": "Splunk Connect for Hyperledger Fabric",
+    "description": "Splunk Connect for Fabric (aka fabriclogger) makes it easy to ingest data about Fabric ledgers, node information, and node metrics into another system for analysis.",
+    "dockerCompose": {
+        "version": "3.3",
+        "services": {
+            "$$cap_appname": {
+                "image": "splunkdlt/fabric-logger:$$cap_fabriclogger_version",
+                "restart": "always",
+                "environment": {
+                    "FABRIC_KEYFILE": "$$cap_fabriclogger_keyfile",
+                    "FABRIC_CERTFILE": "$$cap_fabriclogger_certfile",
+                    "FABRIC_CLIENT_CERTFILE": "$$cap_fabriclogger_client_certfile",
+                    "FABRIC_CLIENT_KEYFILE": "$$cap_fabriclogger_client_keyfile",
+                    "FABRIC_MSP": "$$cap_fabriclogger_msp",
+                    "FABRIC_PEER": "$$cap_fabriclogger_peer",
+                    "SPLUNK_HEC_TOKEN": "$$cap_fabriclogger_hec_token",
+                    "SPLUNK_HEC_URL": "$$cap_fabriclogger_hec_url",
+                    "SPLUNK_INDEX": "$$cap_fabriclogger_events_index",
+                    "LOGGING_LOCATION": "$$cap_fabriclogger_log_location",
+                    "NETWORK_CONFIG": "$$cap_fabriclogger_network"
+                },
+                "volumes": [
+                    "$$cap_appname-crypto:/usr/src/app/crypto/",
+                    "$$cap_appname-network.yaml:/usr/src/app/network.yaml",
+                    "$$cap_appname-fabriclogger.yaml:/usr/src/app/fabriclogger.yaml",
+                    "$$cap_appname-checkpoints:/usr/src/app/.checkpoints"
+                ]
+            }
+        }
+    },
+    "instructions": {
+        "start": "Deploying fabric logger",
+        "end": "Fabric Logger is deployed and available as $$cap_appname"
+    },
+    "variables": [
+        {
+            "id": "$$cap_fabriclogger_keyfile",
+            "label": "Keyfile",
+            "description": "Keyfile for fabriclogger to use when connecting",
+            "defaultValue": ""
+        },
+        {
+            "id": "$$cap_fabriclogger_version",
+            "label": "fabriclogger Version",
+            "description": "Version of fabriclogger",
+            "defaultValue": "latest"
+        },
+        {
+            "id": "$$cap_fabriclogger_certfile",
+            "label": "fabriclogger certfile",
+            "description": "Certfile  for fabriclogger",
+            "defaultValue": ""
+        },
+        {
+            "id": "$$cap_fabriclogger_client_certfile",
+            "label": "Fabriclogger Client certfile",
+            "description": "Client cert to connect to peers",
+            "defaultValue": ""
+        },
+        {
+            "id": "$$cap_fabriclogger_client_keyfile",
+            "label": "Client keyfile",
+            "description": "Client keyfile to use when connecting to peers",
+            "defaultValue": ""
+        },
+        {
+            "id": "$$cap_fabriclogger_hec_token",
+            "label": "HEC Token",
+            "description": "Splunk HEC Token for fabriclogger to use",
+            "defaultValue": "11111111-1111-1111-1111-1111111111113"
+        },
+        {
+            "id": "$$cap_fabriclogger_events_index",
+            "label": "Events Index",
+            "description": "Splunk Index for events",
+            "defaultValue": "hyperledger_logs"
+        },
+        {
+            "id": "$$cap_fabriclogger_msp",
+            "label": "MSP",
+            "description": "MSP to connect to",
+            "defaultValue": ""
+        },
+        {
+            "id": "$$cap_fabriclogger_peer",
+            "label": "Peer",
+            "description": "peer to connect to",
+            "defaultValue": ""
+        },
+        {
+            "id": "$$cap_fabriclogger_log_location",
+            "label": "Logging location",
+            "description": "Where to log to",
+            "defaultValue": "splunk"
+        },
+        {
+            "id": "$$cap_fabriclogger_network",
+            "label": "Network connection profile name",
+            "description": "Network profile file name",
+            "defaultValue": "network.yaml"
+        }
+    ]
+}

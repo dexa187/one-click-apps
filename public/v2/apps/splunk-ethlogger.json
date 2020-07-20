@@ -7,7 +7,7 @@
         "version": "3.3",
         "services": {
             "$$cap_appname": {
-                "image": "splunkdlt/ethlogger::$$cap_ethlogger_version",
+                "image": "splunkdlt/ethlogger:$$cap_ethlogger_version",
                 "restart": "always",
                 "environment": {
                     "ETH_RPC_URL": "$$cap_ethlogger_rpc",
@@ -28,8 +28,8 @@
         }
     },
     "instructions": {
-        "start": "This is a very simple splunk instance",
-        "end": "Splunk is deployed and available as $$cap_appname"
+        "start": "Deploying splunk connect for ethereum",
+        "end": "Ethlogger is deployed and available as $$cap_appname"
     },
     "variables": [
         {
