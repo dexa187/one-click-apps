@@ -15,8 +15,8 @@
                     "SPLUNK_HEC_URL": "$$cap_ethlogger_hec",
                     "SPLUNK_HEC_TOKEN": "$$cap_ethlogger_token",
                     "SPLUNK_EVENTS_INDEX": "$$cap_ethlogger_events_index",
-                    "SPLUNK_METRICS_INDEX": "$$cap_ethlogger_events_index",
-                    "SPLUNK_INTERNAL_INDEX": "$$cap_ethlogger_events_index",
+                    "SPLUNK_METRICS_INDEX": "$$cap_ethlogger_metrics_index",
+                    "SPLUNK_INTERNAL_INDEX": "$$cap_ethlogger_internal_index",
                     "SPLUNK_HEC_REJECT_INVALID_CERTS": "$$cap_ethlogger_reject_certs",
                     "ABI_DIR": "$$cap_ethlogger_abi_folder"
                 },
