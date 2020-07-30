@@ -46,8 +46,8 @@
         },
         {
             "id": "$$cap_ethlogger_start",
-            "label": "Ethlogger Version",
-            "description": "Version of Ethlogger",
+            "label": "Starting Block",
+            "description": "Block Number to Start logging from",
             "defaultValue": "latest"
         },
         {
